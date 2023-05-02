@@ -129,8 +129,10 @@
                         fromToDate,
                         firstRun)      
     } else {
-      cl <- makeCluster(ncores)
-      registerDoParallel(cl)
+      #cl <- makeCluster(ncores)
+      #registerDoParallel(cl)
+      cl <- startMPIcluster(verbose = TRUE)
+      registerDoMPI(cl)
       foreach(i = 1:ncores, .combine = 'c', .export=c("runSWATSequential",
                                                       "getParameterValue", 
                                                       "updateMultiFile",
@@ -155,7 +157,9 @@
                                                                           firstRun)
                                                         
                                                       }
-      stopCluster(cl)      
+      #stopCluster(cl)
+      closeCluster(cl)
+      mpi.quit()
     }
      
   }
