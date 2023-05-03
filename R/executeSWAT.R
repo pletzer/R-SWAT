@@ -159,7 +159,7 @@
                                                       }
       #stopCluster(cl)
       closeCluster(cl)
-      mpi.quit()
+      mpi.exit()
     }
      
   }
